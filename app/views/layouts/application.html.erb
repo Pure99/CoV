@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Коэффициент вариации</title>
+<%=  stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' %> 
+<%=  javascript_include_tag 'https://code.jquery.com/jquery-3.1.1.min.js' %> 
+<%=  javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' %>
+<%= stylesheet_link_tag    "application.css", media: "all", "data-turbolinks-track": "reload" %>
+<%= javascript_include_tag "application.js", 'data-turbolinks-track': 'reload' %>
+<%= csrf_meta_tags %>
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<%= link_to "Коэффициент вариации", root_url, :class => 'navbar-brand' %>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav ">
+				<li><%= link_to "Создать таблицу", new_table_path %> </li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<% if user_signed_in? %>
+				<li><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></li>
+				<li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link' %></li>
+				<li><%= link_to current_user.email, user_root_path, :class => 'navbar-link' %></li>
+				<% else %>
+				<li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link' %></li>
+				<li><%= link_to "Login", new_user_session_path, :class => 'navbar-link' %></li>
+				<% end %>
+			</ul>
+		</div><!--/.nav-collapse -->
+	</div>
+</nav>
+<div class="container">
+	<% if notice %>
+	<p class="alert alert-success"><%= notice %></p>
+	<% end %>
+	<% if alert %>
+	<p class="alert alert-danger"><%= alert %></p>
+	<% end %>
+	<%= yield %>
+</div>
+</body>
+</html>

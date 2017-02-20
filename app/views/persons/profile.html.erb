@@ -1,0 +1,9 @@
+<h1>Сводные таблицы по составам</h1>
+
+<% @tables.each do |post| %>
+	<div class="well">
+		<h3><%= table.title %></h3>
+		<p><%= table.body %>  </p>
+		<%= link_to "Открыть таблицу", table_path(table), :class => 'btn btn-default' %>
+	</div>
+<% end %>
