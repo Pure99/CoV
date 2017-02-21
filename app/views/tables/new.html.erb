@@ -1,1 +1,27 @@
-ada
+<h1>Добавить таблицу</h1>
+<div class="table-responsive">
+            
+
+<%= form_for :table, url: tables_path do |f| %>
+	<% if @table.errors.any? %>
+		<% @table.errors.full_messages.each do |msg| %>
+		<div class="alert alert-danger"><%= msg %></div>
+		<% end %>
+		<% end %>
+		<p>
+	<%= f.label :title %><br>
+	<%= f.text_field(:title, {:class => 'form-control'}) %>
+	</p>
+
+	<p>
+	<%= f.label :body %><br>
+	<%= f.text_area(:body, {:class => 'form-control'}) %>
+	</p>
+		
+	<p>
+	<%= f.submit({:class => 'btn btn-primary', :value => 'Сохранить таблицу'}) %>
+	</p>
+
+<% end %>
+ 
+          </div>

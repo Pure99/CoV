@@ -2,7 +2,6 @@ class TablesController < ApplicationController
 	  before_filter :authenticate_user!, except: [:index, :show]
 	def index
 		@tables = Table.all
-		#@p1 = Var.new
 	end
 
 	def show
@@ -15,8 +14,8 @@ class TablesController < ApplicationController
 	end
 
 	def create
-		#render plain: params[:Table].inspect
-		@table = Table.new(Table_params)
+		@user = User.find(params[:user_id])
+		@table = @user.tables.create(table_params)
 		if@table.save
 			redirect_to @table
 		else
@@ -32,7 +31,7 @@ class TablesController < ApplicationController
 	def update 
 		@table = Table.find(params[:id])
 
-		if(@table.update(Table_params))
+		if(@table.update(table_params))
 			redirect_to @table
 		else
 			render 'edit'
@@ -47,7 +46,7 @@ class TablesController < ApplicationController
 	end
 
 
-	private def Table_params
-	params.require(:Table).permit(:title, :body, :date, :pr_1_mpa, :pr_1_p, :pr_28_mpa, :pr_28_p, :pr_pr_mpa, :pr_pr_p, :mark)
+	private def table_params
+	params.require(:table).permit(:user, :title, :body)
 end
 end
