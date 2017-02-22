@@ -14,8 +14,8 @@ class TablesController < ApplicationController
 	end
 
 	def create
-		@user = User.find(params[:user_id])
-		@table = @user.tables.create(table_params)
+		@table = current_user.tables.create(table_params)
+		
 		if@table.save
 			redirect_to @table
 		else
