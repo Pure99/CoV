@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2017-02-24
+  pr_1_mpa: 9.99
+  pr_1_p: 9.99
+  pr_28_mpa: 9.99
+  pr_28_p: 9.99
+  pr_pr_mpa: 9.99
+  pr_pr_p: 9.99
+  note: MyText
+  mark: false
+  table: one
+
+two:
+  date: 2017-02-24
+  pr_1_mpa: 9.99
+  pr_1_p: 9.99
+  pr_28_mpa: 9.99
+  pr_28_p: 9.99
+  pr_pr_mpa: 9.99
+  pr_pr_p: 9.99
+  note: MyText
+  mark: false
+  table: two

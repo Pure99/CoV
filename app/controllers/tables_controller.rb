@@ -1,11 +1,11 @@
 class TablesController < ApplicationController
-	  before_filter :authenticate_user!, except: [:index, :show]
+	  before_filter :authenticate_user!, except: [:index]
 	def index
-		@tables = Table.all
+		@tables = current_user.tables.all
 	end
 
 	def show
-		@table = Table.find(params[:id])
+		@table = current_user.tables.find(params[:id])
 	end
 
 	def new
@@ -24,7 +24,7 @@ class TablesController < ApplicationController
 	end
 
 	def edit
-		@table = Table.find(params[:id])
+		@table = current_user.tables.find(params[:id])
 		
 	end	
 
@@ -42,7 +42,7 @@ class TablesController < ApplicationController
 		@table = Table.find(params[:id])
 		@table.destroy
 
-		redirect_to home_path
+		redirect_to root_url
 	end
 
 

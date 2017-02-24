@@ -1,0 +1,80 @@
+<h2><%= @table.title %> </h2>
+<p><%= @table.body %> </p>    
+<HR>
+<%= link_to "Редактировать", edit_table_path(@table), :class => 'btn btn-default' %>
+<%= link_to "Удалить", table_path(@table), method: :delete, data: {confirm: 'Are you sure?'}, :class => 'btn btn-danger' %>
+<hr>
+<h3>Таблица</h3>
+<div class="well">
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr >
+          <th>№п/п</th>
+          <th>Дата изготовления</th>
+          <th>Прочность на 1 сутки, МПа</th>
+          <th>Прочность на 1 сутки, %</th>
+          <th>Прочность на 28 сутки, МПа</th>
+          <th>Прочность на 28 сутки, %</th>
+          <th>Прирост прочности, МПа</th>
+          <th>Прирост прочности, %</th>
+          <th>Примечания</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @table.lines.each_with_index do |comment, index| %>
+        <tr contenteditable="true">
+        <td><%= index+1 %></td>
+          <td><%= comment.date %></td>
+          <td><%= comment.pr_1_mpa %></td>
+          <td><%= comment.pr_1_p %></td>
+          <td><%= comment.pr_28_mpa %></td>
+          <td><%= comment.pr_28_p %></td>
+          <td><%= comment.pr_pr_mpa %></td>
+          <td><%= comment.pr_pr_p %></td>
+          <td><%= comment.mark %></td>
+          <td><%= link_to '[X]', [comment.table, comment], method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+     </div>
+
+<h3>Добавить строку</h3>
+<div class="well">
+  <div class="table-responsive">
+    <%= form_for([@table, @table.lines.build]) do |f| %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Дата</th>
+          <th>Прочность на 1 сутки, МПа</th>
+          <th>Прочность на 1 сутки, %</th>
+          <th>Прочность на 28 сутки, МПа</th>
+          <th>Прочность на 28 сутки, %</th>
+          <th>Прирост прочности, МПа</th>
+          <th>Прирост прочности, %</th>
+          <th>Примечания</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr contenteditable="true">
+          <td><%= f.text_field(:date, {:class => 'form-control', :type => 'date'}) %></td>
+          <td><%= f.text_field(:pr_1_mpa, {:class => 'form-control'}) %></td>
+          <td><%= f.text_field(:pr_1_p, {:class => 'form-control'}) %></td>
+          <td><%= f.text_field(:pr_28_mpa, {:class => 'form-control'}) %></td>
+          <td><%= f.text_field(:pr_28_p, {:class => 'form-control'}) %></td>
+          <td><%= f.text_field(:pr_pr_mpa, {:class => 'form-control'}) %></td>
+          <td><%= f.text_field(:pr_pr_p, {:class => 'form-control'}) %></td>
+          <td><%= f.text_field(:mark, {:class => 'form-control'}) %></td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+     <%= f.submit({:class => 'btn btn-primary', :value => 'Добавить строчку' }) %>
+   </p>
+   <% end %>
+
+  </div>  
+</div>         

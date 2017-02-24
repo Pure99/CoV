@@ -1,5 +1,5 @@
 class PersonsController < ApplicationController
 	def profile
-		@tables = Table.all
+		@tables = current_user.tables.all
 	end
 end

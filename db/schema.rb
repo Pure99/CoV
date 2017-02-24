@@ -10,7 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170220054536) do
+ActiveRecord::Schema.define(version: 20170223171013) do
+
+  create_table "lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.date     "date"
+    t.decimal  "pr_1_mpa",                 precision: 10, scale: 1
+    t.decimal  "pr_1_p",                   precision: 10, scale: 1
+    t.decimal  "pr_28_mpa",                precision: 10, scale: 1
+    t.decimal  "pr_28_p",                  precision: 10, scale: 1
+    t.decimal  "pr_pr_mpa",                precision: 10, scale: 1
+    t.decimal  "pr_pr_p",                  precision: 10, scale: 1
+    t.text     "note",       limit: 65535
+    t.boolean  "mark"
+    t.integer  "table_id"
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
+    t.index ["table_id"], name: "index_lines_on_table_id", using: :btree
+  end
 
   create_table "tables", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title"
@@ -38,5 +54,6 @@ ActiveRecord::Schema.define(version: 20170220054536) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "lines", "tables"
   add_foreign_key "tables", "users"
 end
