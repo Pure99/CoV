@@ -18,14 +18,14 @@
         </tr>
       </thead>
       <tbody>
-        <% Comment.where(:post_id => @post.id).each_with_index do |element, index| %>
+        <% Line.where(:table_id => @table.id).each_with_index do |element, index| %>
         <tr>
           <td><%= index + 1 %></td>
           <td><%= element.date %></td>
           <td><%= element.pr_28_mpa %></td>
           <td></td>
-          <td><%= element.pr_28_mpa.to_f-Comment.midS(@post.id) %></td>
-          <td><%= ((element.pr_28_mpa.to_f-Comment.midS(@post.id))**2).round(1) %><%#= Comment.midS(@post.id) %></td>
+          <td><%= element.pr_28_mpa.to_f-Line.midS(@table.id) %></td>
+          <td><%= ((element.pr_28_mpa.to_f-Line.midS(@table.id))**2).round(1) %><%#= Line.midS(@table.id) %></td>
           <td></td>
           <td></td>
           <td></td>
@@ -36,15 +36,15 @@
         <tr>
           <td>Итог</td>
           <td></td>
-          <td><%= Comment.sumP(@post.id)%></td>
-          <td><%= Comment.midS(@post.id)%></td>
+          <td><%= Line.sumP(@table.id)%></td>
+          <td><%= Line.midS(@table.id)%></td>
           <td></td>
-          <td><%= Comment.sumR(@post.id)%></td>
-          <td><%= Comment.max_min(@post.id)%><%#= Comment.maximum("pr_28_mpa")-Comment.minimum("pr_28_mpa") %></td>
-          <td><%= Comment.s_m(@post.id) %></td>
-          <td><%= Comment.v_m(@post.id) %></td>
-          <td><%= Comment.k_t(@post.id) %></td>
-          <td><%= Comment.r_t(@post.id,@post.title) %></td>
+          <td><%= Line.sumR(@table.id)%></td>
+          <td><%= Line.max_min(@table.id)%><%#= Line.maximum("pr_28_mpa")-Line.minimum("pr_28_mpa") %></td>
+          <td><%= Line.s_m(@table.id) %></td>
+          <td><%= Line.v_m(@table.id) %></td>
+          <td><%= Line.k_t(@table.id) %></td>
+          <td><%= Line.r_t(@table.id,@table.title) %></td>
         </tbody>
       </table>
     </div>

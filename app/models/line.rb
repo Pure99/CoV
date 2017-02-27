@@ -46,12 +46,12 @@ class Line < ApplicationRecord
 
 
   	def self.sumP a
-  		Comment.where(:post_id => a).sum('pr_28_mpa')
+  		Line.where(:table_id => a).sum('pr_28_mpa')
   	end 
 
   	def self.midS a
-  		if Comment.where(:post_id => a).count('pr_28_mpa') != 0
-  			(sumP(a)/Comment.where(:post_id => a).count('pr_28_mpa')).round(1)
+  		if Line.where(:table_id => a).count('pr_28_mpa') != 0
+  			(sumP(a)/Line.where(:table_id => a).count('pr_28_mpa')).round(1)
   		else 
   			return 0
   		end
@@ -59,28 +59,28 @@ class Line < ApplicationRecord
 
   	def self.r_r a
 
-  		Comment.where(:post_id => a).pr_28_mpa.to_f-midS(a)
+  		Line.where(:table_id => a).pr_28_mpa.to_f-midS(a)
   	end
 
   	def self.sumR a
   		sumR=0
-  		Comment.where(:post_id => a).each { |x| sumR = sumR + ((x.pr_28_mpa.to_f-midS(a))**2).round(1) }
+  		Line.where(:table_id => a).each { |x| sumR = sumR + ((x.pr_28_mpa.to_f-midS(a))**2).round(1) }
   		return sumR
   	end 
 
   	def self.max_min a
-  		if Comment.where(:post_id => a).maximum('pr_28_mpa') && Comment.where(:post_id => a).minimum('pr_28_mpa') 
-  			Comment.where(:post_id => a).maximum('pr_28_mpa')-Comment.where(:post_id => a).minimum('pr_28_mpa')
+  		if Line.where(:table_id => a).maximum('pr_28_mpa') && Line.where(:table_id => a).minimum('pr_28_mpa') 
+  			Line.where(:table_id => a).maximum('pr_28_mpa')-Line.where(:table_id => a).minimum('pr_28_mpa')
   		else
   			return 0
   		end
   	end 
 
   	def self.s_m a
-  		if Comment.where(:post_id => a).count('pr_28_mpa') > 6
-  			s_m = Math.sqrt(sumR(a)/(Comment.where(:post_id => a).count('pr_28_mpa')-1)) 
-  		elsif Comment.where(:post_id => a).count('pr_28_mpa') <= 6
-  			s_m = max_min(a)/alfa(Comment.where(:post_id => a).count('pr_28_mpa'))
+  		if Line.where(:table_id => a).count('pr_28_mpa') > 6
+  			s_m = Math.sqrt(sumR(a)/(Line.where(:table_id => a).count('pr_28_mpa')-1)) 
+  		elsif Line.where(:table_id => a).count('pr_28_mpa') <= 6
+  			s_m = max_min(a)/alfa(Line.where(:table_id => a).count('pr_28_mpa'))
   		end
   		return s_m.round(1)
   	end 
